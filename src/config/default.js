@@ -6,6 +6,10 @@ const local = {
     level: 'debug',
     layoutType: 'coloured',
     maxStringLength: 80
+  },
+  mail: {
+    user: 'test@test.com.br',
+    passwd: 'test123'
   }
 }
 
