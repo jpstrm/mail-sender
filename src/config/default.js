@@ -8,8 +8,9 @@ const local = {
     maxStringLength: 80
   },
   mail: {
+    host: 'smtp.test.com',
     user: 'test@test.com.br',
-    passwd: 'test123'
+    pass: 'test123'
   }
 }
 

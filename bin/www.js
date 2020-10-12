@@ -7,7 +7,7 @@ let port
 /**
  * Start server.
  */
-async function startServer () {
+const startServer = async () => {
   port = normalizePort(process.env.PORT || '8080')
   await app.configure(port)
 
@@ -24,7 +24,7 @@ async function startServer () {
   server.listen(port)
   server.on('error', onError)
   server.on('listening', onListening)
-  server.on('close', function () {
+  server.on('close', () => {
     logger.info('HTTP server closing ...')
   })
 }
@@ -35,7 +35,7 @@ async function startServer () {
  * @param {string} val port value
  * @returns {(string|number|boolean)}
  */
-function normalizePort (val) {
+const normalizePort = (val) => {
   const port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -56,7 +56,7 @@ function normalizePort (val) {
  *
  * @param {Error} error error object
  */
-function onError (error) {
+const onError = (error) => {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -82,7 +82,7 @@ function onError (error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-function onListening () {
+const onListening = () => {
   const addr = server.address()
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr

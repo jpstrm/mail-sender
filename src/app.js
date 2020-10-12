@@ -54,7 +54,7 @@ const getErrorHandler = () => {
    * @param {Response} req the response object
    * @param {function} next the next function
    */
-  function errorHandler (err, req, res, next) {
+  const errorHandler = (err, req, res, next) => {
     logger.debug(err)
     let data
     let printStackTrace = false
@@ -133,7 +133,7 @@ const configure = async (port) => {
   app.use(config.get('basePath'), routes)
 
   // catch 404 and forward to error handler
-  app.use(function (req, res, next) {
+  app.use((req, res, next) => {
     next(httpErrors(404))
   })
 

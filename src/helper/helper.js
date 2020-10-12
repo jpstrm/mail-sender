@@ -4,7 +4,7 @@
  * @param {string} value the string that will be converted
  * @returns {string}
  */
-function convertToRegex (value) {
+const convertToRegex = (value) => {
   if (value.startsWith('/')) {
     var endpoint = value.replace(/\//g, '')
     return new RegExp(endpoint)
@@ -18,7 +18,7 @@ function convertToRegex (value) {
  * @param {Object} data to sanitize
  * @returns the sanitized data
  */
-function sanitizeErrorObject (data) {
+const sanitizeErrorObject = (data) => {
   for (const key of ['error', 'errorDescription']) {
     if (data[key]) {
       data[key] = data[key].replace(/[\000-\037<>]/g, '')
