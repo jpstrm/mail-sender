@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const ejs = require('ejs')
 const logger = require('../common/log').getLogger('transporter')
 const config = require('../config')
 
@@ -21,4 +22,34 @@ transporter.verify((err, success) => {
   }
 })
 
-module.exports = transporter
+const sendMail = (body, template) => {
+  return new Promise((resolve, reject) => {
+    ejs.renderFile(`${__dirname}/template/${template}.ejs`, { name: body.name }, function (err, data) {
+      if (err) {
+        logger.error('Ejs render error', err)
+        reject(err)
+      } else {
+        const options = {
+          from: body.from,
+          to: body.email,
+          subject: body.subject,
+          html: data
+        }
+        logger.debug('html data', options.html)
+
+        transporter.sendMail(options, function (err, info) {
+          if (err) {
+            reject(err)
+          } else {
+            logger.debug('Main sent successfully')
+            resolve()
+          }
+        })
+      }
+    })
+  })
+}
+
+module.exports = {
+  sendMail
+}

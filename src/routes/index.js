@@ -1,11 +1,15 @@
 const app = require('express')
-const router = app.Router()
+
+const joiMiddleware = require('../middleware/joi.middleware')
 const healthController = require('../controllers').healthController
-const mailController = require('../controllers').mailController
+const emailController = require('../controllers').emailController
+const sendEmailSchema = require('../controllers/email/email.schema').sendEmailSchema
+
+const router = app.Router()
 
 router.get('/health', healthController)
 
-// Mail
-router.post('/mail/send', mailController.send)
+// mail
+router.post('/mail/send', joiMiddleware(sendEmailSchema), emailController.send)
 
 module.exports = router

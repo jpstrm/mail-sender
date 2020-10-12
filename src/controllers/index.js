@@ -1,7 +1,7 @@
 const healthController = require('./health.controller')
-const mailController = require('./mail.controller')
+const emailController = require('./email/email.controller')
 
 module.exports = {
   healthController,
-  mailController
+  emailController
 }

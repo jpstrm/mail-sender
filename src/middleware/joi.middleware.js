@@ -1,16 +1,15 @@
 const joi = require('joi')
+const errors = require('../errors/errors')
 
 const middleware = (schema, property) => {
   return (req, res, next) => {
-    const { error } = joi.validate(req.body, schema)
-    const valid = error == null
+    const { err } = joi.validate(req.body, schema)
+    const valid = err == null
 
     if (valid) { next() } else {
-      const { details } = error
-      const message = details.map(i => i.message).join(',')
-
-      console.error('Validation error:', message)
-      res.status(400).json({ error: message })
+      const { details } = err
+      const errorDetail = details.map(i => i.message).join(',')
+      throw new errors.ValidationError(500, err, errorDetail)
     }
   }
 }

@@ -1,3 +1,5 @@
+'use strict'
+
 const health = (req, res, next) => {
   const health = {
     uptime: process.uptime(),
@@ -5,7 +7,7 @@ const health = (req, res, next) => {
     timestamp: Date.now()
   }
   try {
-    res.send(health)
+    res.status(200).send(health)
   } catch (e) {
     health.message = e
     res.status(503).send()
