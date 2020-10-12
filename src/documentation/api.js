@@ -3,8 +3,8 @@ const { version } = require('../../package.json')
 module.exports = {
   openapi: '3.0.1',
   info: {
-    title: 'Node Sample Document',
-    description: 'Sample application',
+    title: 'Mail Sender Document',
+    description: 'Mail Sender Application using nodemailer and ejs',
     version: version,
     termsOfService: ''
   },
