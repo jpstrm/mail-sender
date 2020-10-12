@@ -3,11 +3,10 @@
 const logger = require('../../common/log').getLogger('mail')
 const errors = require('../../errors/errors')
 const sendMail = require('../../mail/transporter').sendMail
-const templateTypes = require('../../mail/template/types.template')
 
 const send = (req, res, next) => {
   logger.debug('Sending email')
-  sendMail(req.body, templateTypes.default)
+  sendMail(req.body)
     .then(res => {
       res.status(200).send({ message: 'Email sent successfully' })
     })
