@@ -6,7 +6,8 @@
     "dev": "nodemon bin/www",
     "start": "cross-env NODE_ENV=production node bin/www",
     "lint": "standard \"src/**/*.js\" \"tests/helpers/*.js\" \"tests/specs/**/*.js\" \"bin/www\"",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "test": "jest"
   },
   "dependencies": {
     "compression": "^1.7.4",
