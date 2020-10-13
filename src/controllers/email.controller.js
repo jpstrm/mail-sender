@@ -1,19 +1,15 @@
 'use strict'
 
 const logger = require('../common/log').getLogger('email')
-const rejectRequest = require('../helper/helper').getRejectRequest(logger)
+const asyncMiddleware = require('../middleware/async.middleware')
 const sendMail = require('../mail/transporter').sendMail
 
-const send = (req, res, next) => {
+const send = asyncMiddleware(async (req, res, next) => {
   logger.debug('Sending email')
-  sendMail(req.body)
-    .then(res => {
-      res.status(200).send({ message: 'Email sent successfully' })
-    })
-    .catch(err => {
-      rejectRequest(req, res, err)
-    })
-}
+  await sendMail(req.body)
+
+  res.status(200).send({ message: 'Email sent successfully' })
+})
 
 module.exports = {
   send

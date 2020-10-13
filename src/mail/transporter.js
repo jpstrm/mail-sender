@@ -26,43 +26,30 @@ transporter.verify((err, success) => {
   }
 })
 
-const sendMail = (body) => {
-  return new Promise((resolve, reject) => {
-    let templatePath = `${path.resolve('./')}/templates/${body.template.name}`
-    if (body.template.source === templateTypes.AWS) {
-      aws.listBuckets()
-        .then(buckets => {
-          logger.debug('AWS buckets fetched successfully', buckets)
-        })
-        .catch(err => {
-          logger.error('Error listing AWS buckets', err)
-        })
-    } else {
-      templatePath = `${path.resolve('./')}/templates/${body.template}`
-    }
-    ejs.renderFile(templatePath, { name: body.name }, function (err, data) {
-      if (err) {
-        logger.error('Ejs render error', err)
-        reject(err)
-      } else {
-        const options = {
-          from: body.from,
-          to: body.email,
-          subject: body.subject,
-          html: data
-        }
-        logger.debug('html data', options.html)
+const sendMail = async (body) => {
+  let templatePath = `${path.resolve('./')}/templates/${body.template.name}`
+  if (body.template.source === templateTypes.AWS) {
+    logger.debug('Fetching repository from AWS S3')
+    const buckets = await aws.listBuckets()
+    logger.info('Buckets fetched from AWS', buckets)
+  } else {
+    templatePath = `${path.resolve('./')}/templates/${body.template.name}`
+  }
+  const emailData = await ejs.renderFile(templatePath, { name: body.name })
 
-        transporter.sendMail(options)
-          .then(res => {
-            resolve(res)
-          })
-          .catch(err => {
-            reject(new errors.MailError(err))
-          })
-      }
-    })
-  })
+  const options = {
+    from: body.from,
+    to: body.email,
+    subject: body.subject,
+    html: emailData
+  }
+  logger.debug('html data', options.html)
+  try {
+    logger.debug('Sending email...')
+    return await transporter.sendMail(options)
+  } catch (err) {
+    throw new errors.MailError(err)
+  }
 }
 
 module.exports = {
