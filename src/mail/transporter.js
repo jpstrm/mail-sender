@@ -33,7 +33,6 @@ const sendMail = (body) => {
       aws.listBuckets()
         .then(buckets => {
           logger.debug('AWS buckets fetched successfully', buckets)
-          console.log('aws buckets', buckets)
         })
         .catch(err => {
           logger.error('Error listing AWS buckets', err)
