@@ -58,10 +58,38 @@ class ValidationError extends ApiError {
   }
 }
 
+class NotFoundError extends ApiError {
+  constructor (error, errorDescription, additionalParams) {
+    super(error)
+    this.statusCode = 404
+    this.body = {
+      statusCode: this.statusCode,
+      error,
+      errorDescription,
+      ...additionalParams
+    }
+  }
+}
+
+class AwsError extends ApiError {
+  constructor (error, errorDescription, additionalParams) {
+    super(error)
+    this.statusCode = error.statusCode
+    this.body = {
+      statusCode: this.statusCode,
+      error: error.stack,
+      errorDescription: errorDescription || error.message,
+      ...additionalParams
+    }
+  }
+}
+
 module.exports = {
   ApiError,
   ApplicationError,
   InternalError,
   MailError,
-  ValidationError
+  ValidationError,
+  NotFoundError,
+  AwsError
 }

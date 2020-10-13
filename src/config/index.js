@@ -3,7 +3,10 @@ const _merge = require('lodash').merge
 const config = require('./default')
 
 const environments = {
-  LOG_LEVEL: 'logging:level'
+  LOG_LEVEL: 'logging:level',
+  AWS_REGION: 'aws:region',
+  AWS_ACCESS_KEY_ID: 'aws:accessKey',
+  AWS_SECRET_ACCESS_KEY: 'aws:secretKey'
 }
 
 nconf.env({

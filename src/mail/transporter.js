@@ -28,14 +28,17 @@ transporter.verify((err, success) => {
 
 const sendMail = async (body) => {
   let templatePath = `${path.resolve('./')}/templates/${body.template.name}`
+  let template = ''
+  let emailData = ''
   if (body.template.source === templateTypes.AWS) {
     logger.debug('Fetching repository from AWS S3')
-    const buckets = await aws.listBuckets()
-    logger.info('Buckets fetched from AWS', buckets)
+    template = await aws.getTemplate(body.template)
+    logger.info('Template fetched from AWS S3')
+    emailData = ejs.render(template)
   } else {
     templatePath = `${path.resolve('./')}/templates/${body.template.name}`
+    emailData = await ejs.renderFile(templatePath, { name: body.name })
   }
-  const emailData = await ejs.renderFile(templatePath, { name: body.name })
 
   const options = {
     from: body.from,
