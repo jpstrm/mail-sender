@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer')
 const ejs = require('ejs')
 const path = require('path')
 const logger = require('../common/log').getLogger('transporter')
+const errors = require('../errors/errors')
 const config = require('../config')
 
 const transport = {
@@ -44,8 +45,7 @@ const sendMail = (body) => {
             resolve(res)
           })
           .catch(err => {
-            logger.error('Error sending email', err)
-            reject(err)
+            reject(new errors.MailError(err))
           })
       }
     })

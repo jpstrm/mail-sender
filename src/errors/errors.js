@@ -37,6 +37,7 @@ class MailError extends ApiError {
     super(error)
     this.statusCode = 500
     this.body = {
+      statusCode: this.statusCode,
       error: error.stack,
       errorDescription: error.message,
       ...additionalParams
@@ -49,6 +50,7 @@ class ValidationError extends ApiError {
     super(error)
     this.statusCode = 400
     this.body = {
+      statusCode: this.statusCode,
       error,
       errorDescription,
       ...additionalParams

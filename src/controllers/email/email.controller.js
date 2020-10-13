@@ -1,7 +1,7 @@
 'use strict'
 
 const logger = require('../../common/log').getLogger('mail')
-const errors = require('../../errors/errors')
+const rejectRequest = require('../../helper/helper').getRejectRequest(logger)
 const sendMail = require('../../mail/transporter').sendMail
 
 const send = (req, res, next) => {
@@ -11,7 +11,7 @@ const send = (req, res, next) => {
       res.status(200).send({ message: 'Email sent successfully' })
     })
     .catch(err => {
-      throw new errors.MailError(err, 'Error sending email')
+      rejectRequest(req, res, err)
     })
 }
 
