@@ -29,6 +29,7 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
+    "aws-sdk": "^2.771.0",
     "husky": "^4.3.0",
     "jest": "^26.5.3",
     "nodemon": "^2.0.4",

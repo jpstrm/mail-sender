@@ -1,5 +1,7 @@
 'use strict'
 
+const logger = require('../common/log').getLogger('health')
+
 const health = (req, res, next) => {
   const health = {
     uptime: process.uptime(),
@@ -7,9 +9,11 @@ const health = (req, res, next) => {
     timestamp: Date.now()
   }
   try {
+    logger.debug('Health check')
     res.status(200).send(health)
-  } catch (e) {
-    health.message = e
+  } catch (ex) {
+    logger.error('Health check error', ex)
+    health.message = ex
     res.status(503).send()
   }
 }

@@ -24,7 +24,46 @@ module.exports = {
         ],
         responses: {
           200: {
-            description: 'Show Api informations',
+            description: 'Show Api information',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    uptime: {
+                      type: 'integer',
+                      description: 'Application uptime'
+                    },
+                    message: {
+                      type: 'string'
+                    },
+                    timestamp: {
+                      type: 'string',
+                      format: 'date-time'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          503: {
+            description: 'Service Unavailable'
+          }
+        }
+      }
+    },
+    '/email/send': {
+      post: {
+        description: 'Send email',
+        produces: [
+          'application/json'
+        ],
+        consumes: [
+          'application/json'
+        ],
+        responses: {
+          200: {
+            description: 'Show Api information',
             content: {
               'application/json': {
                 schema: {

@@ -11,6 +11,10 @@ const local = {
     host: 'smtp.test.com',
     user: 'test@test.com.br',
     pass: 'test123'
+  },
+  aws: {
+    region: 'us-west-2',
+    apiVersion: '2006-03-01'
   }
 }
 

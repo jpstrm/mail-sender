@@ -1,8 +1,8 @@
 'use strict'
 
-const logger = require('../../common/log').getLogger('mail')
-const rejectRequest = require('../../helper/helper').getRejectRequest(logger)
-const sendMail = require('../../mail/transporter').sendMail
+const logger = require('../common/log').getLogger('email')
+const rejectRequest = require('../helper/helper').getRejectRequest(logger)
+const sendMail = require('../mail/transporter').sendMail
 
 const send = (req, res, next) => {
   logger.debug('Sending email')

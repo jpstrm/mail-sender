@@ -4,6 +4,8 @@ const path = require('path')
 const logger = require('../common/log').getLogger('transporter')
 const errors = require('../errors/errors')
 const config = require('../config')
+const aws = require('../controllers/aws.controller')
+const templateTypes = require('./templateSource.enum')
 
 const transport = {
   host: config.get('mail:host'),
@@ -25,8 +27,20 @@ transporter.verify((err, success) => {
 })
 
 const sendMail = (body) => {
-  const templatePath = `${path.resolve('./')}/templates/${body.template}`
   return new Promise((resolve, reject) => {
+    let templatePath = `${path.resolve('./')}/templates/${body.template.name}`
+    if (body.template.source === templateTypes.AWS) {
+      aws.listBuckets()
+        .then(buckets => {
+          logger.debug('AWS buckets fetched successfully', buckets)
+          console.log('aws buckets', buckets)
+        })
+        .catch(err => {
+          logger.error('Error listing AWS buckets', err)
+        })
+    } else {
+      templatePath = `${path.resolve('./')}/templates/${body.template}`
+    }
     ejs.renderFile(templatePath, { name: body.name }, function (err, data) {
       if (err) {
         logger.error('Ejs render error', err)
