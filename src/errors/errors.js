@@ -51,7 +51,20 @@ class ValidationError extends ApiError {
     this.statusCode = 400
     this.body = {
       statusCode: this.statusCode,
-      error,
+      error: error,
+      errorDescription,
+      ...additionalParams
+    }
+  }
+}
+
+class JoiError extends ApiError {
+  constructor (error, errorDescription, additionalParams) {
+    super(error)
+    this.statusCode = 400
+    this.body = {
+      statusCode: this.statusCode,
+      error: error.message,
       errorDescription,
       ...additionalParams
     }
@@ -91,5 +104,6 @@ module.exports = {
   MailError,
   ValidationError,
   NotFoundError,
-  AwsError
+  AwsError,
+  JoiError
 }
