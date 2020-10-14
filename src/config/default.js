@@ -12,9 +12,9 @@ const local = {
     maxStringLength: 80
   },
   mail: {
-    host: 'smtp.test.com',
-    user: 'test@test.com.br',
-    pass: 'test123'
+    host: process.env.EMAIL_HOST || 'smtp.test.com',
+    user: process.env.EMAIL_USER || 'test@test.com.br',
+    pass: process.env.EMAIL_PASS || 'test123'
   },
   aws: {
     region: process.env.AWS_REGION || 'us-west-2',
