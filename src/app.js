@@ -1,10 +1,10 @@
+const express = require('express')
 const compression = require('compression')
 const httpErrors = require('http-errors')
-const express = require('express')
 const nocache = require('nocache')
 const expressRequestID = require('express-request-id')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
+// const cors = require('cors')
 const log4js = require('log4js')
 
 const config = require('./config')
@@ -13,8 +13,8 @@ const log = require('./common/log')
 const logger = log.getLogger('app')
 const helper = require('./helper/helper')
 const errors = require('./errors/errors')
-const allowedCorsOrigins = config.get('allowedCorsOrigins')
-const origins = allowedCorsOrigins.map(helper.convertToRegex)
+// const allowedCorsOrigins = config.get('allowedCorsOrigins')
+// const origins = allowedCorsOrigins.map(helper.convertToRegex)
 const swaggerUi = require('swagger-ui-express')
 const apiDocument = require('./documentation/api')
 
@@ -107,15 +107,17 @@ const getErrorHandler = () => {
 
 // Configure application
 const configure = async (port) => {
-  app.set('port', port)
+  if (port !== undefined) {
+    app.set('port', port)
+  }
 
   // configure middlewares
   app.use(nocache())
   app.use(expressRequestID())
-  app.use(cors({
-    credentials: true,
-    origin: origins
-  }))
+  // app.use(cors({
+  //   credentials: true,
+  //   origin: origins
+  // }))
 
   // gzip - improve response performance
   app.use(compression())

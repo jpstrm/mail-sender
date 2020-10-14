@@ -1,21 +1,24 @@
 service: emailsender
-
-frameworkVersion: '2'
-
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: dev
   region: sa-east-1
-  stack: email-sender-dev
+
+package:
+  exclude:
+    - .gitignore
+    - .git/**
+    - tests/**
 
 functions:
   app:
-    handler: handler.app
+    handler: src/appHandler
     events:
       - http:
-          method: ANY
           path: /
-      - http:
           method: ANY
+          cors: true
+      - http:
           path: /{proxy+}
+          method: ANY
+          cors: true
