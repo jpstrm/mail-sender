@@ -1,0 +1,18 @@
+service: emailsender
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: sa-east-1
+  stack: email-sender-dev
+
+functions:
+  app:
+    handler: handler.app
+    events:
+      - http:
+          method: ANY
+          path: /{proxy+}
