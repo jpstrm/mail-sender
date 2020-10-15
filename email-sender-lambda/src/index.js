@@ -1,5 +1,5 @@
 const logger = require('./common/log').getLogger('appHandler')
-const { emailService } = require('./services')
+const emailService = require('./services/email.service')
 
 module.exports.handler = async (event, context) => {
   console.log('context', context)
