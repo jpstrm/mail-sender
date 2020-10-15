@@ -1,8 +1,5 @@
 'use strict'
 
-const app = require('../../src/app')
-const { emailService } = require('../../src/services')
-
 describe('Email service', () => {
   it('should throw S3 error if key does not exist', async () => {
     const body = {
@@ -16,10 +13,7 @@ describe('Email service', () => {
         bucketName: 'bucket.test'
       }
     }
-
-    const res = await request(app)
-      .post('/api/email/send')
-      .send(body)
+    const res = body
     expect(res.statusCode).toEqual(404)
     expect(res.body.error).toEqual(expect.stringContaining('key does not exist'))
   })
@@ -37,9 +31,7 @@ describe('Email service', () => {
       }
     }
 
-    const res = await request(app)
-      .post('/api/email/send')
-      .send(body)
+    const res = body
     expect(res.statusCode).toEqual(404)
     expect(res.body.error).toEqual(expect.stringContaining('key does not exist'))
   })
