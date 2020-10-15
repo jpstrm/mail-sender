@@ -1,6 +1,6 @@
 'use strict'
 
-const { awsService } = require('../../src/services')
+const awsService = require('../../src/services/aws.service')
 
 describe('AWS service', () => {
   it('should throw error if bad credentials', async () => {

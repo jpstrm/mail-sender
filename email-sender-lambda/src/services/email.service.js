@@ -1,7 +1,7 @@
 'use strict'
 
 const logger = require('../common/log').getLogger('email')
-const sendMail = require('../transporter/transporter').sendMail
+const { sendMail } = require('../transporter/transporter')
 
 const send = async (email) => {
   logger.info('Email recebido para ser enviado', email)

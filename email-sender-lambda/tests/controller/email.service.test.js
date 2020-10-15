@@ -1,5 +1,7 @@
 'use strict'
 
+const emailService = require('../../src/services/email.service')
+
 describe('Email service', () => {
   it('should throw S3 error if key does not exist', async () => {
     const body = {
@@ -13,9 +15,13 @@ describe('Email service', () => {
         bucketName: 'bucket.test'
       }
     }
-    const res = body
-    expect(res.statusCode).toEqual(404)
-    expect(res.body.error).toEqual(expect.stringContaining('key does not exist'))
+    try {
+      await emailService.send(body)
+    } catch (e) {
+      expect(e.statusCode).toEqual(404)
+      expect(e.name).toEqual('AwsError')
+      expect(e.body.error).toEqual(expect.stringContaining('key does not exist'))
+    }
   })
 
   it('should throw S3 error if key does not exist', async () => {
@@ -30,9 +36,12 @@ describe('Email service', () => {
         bucketName: 'bucket.test'
       }
     }
-
-    const res = body
-    expect(res.statusCode).toEqual(404)
-    expect(res.body.error).toEqual(expect.stringContaining('key does not exist'))
+    try {
+      await emailService.send(body)
+    } catch (e) {
+      expect(e.statusCode).toEqual(404)
+      expect(e.name).toEqual('AwsError')
+      expect(e.body.error).toEqual(expect.stringContaining('key does not exist'))
+    }
   })
 })

@@ -4,7 +4,7 @@ const path = require('path')
 const logger = require('../common/log').getLogger('transporter')
 const errors = require('../errors/errors')
 const config = require('../config')
-const aws = require('../services/aws.controller')
+const awsService = require('../services/aws.service')
 const templateTypes = require('../../templates/templateSource.enum')
 
 const transport = {
@@ -32,7 +32,7 @@ const sendMail = async (emailReq) => {
   let emailData = ''
   if (emailReq.template.source === templateTypes.AWS) {
     logger.info('Buscando template do diretório da AWS S3')
-    template = await aws.getTemplate(emailReq.template)
+    template = await awsService.getTemplate(emailReq.template)
     logger.info('Template obtido com sucesso da AWS S3')
     emailData = ejs.render(template)
   } else {

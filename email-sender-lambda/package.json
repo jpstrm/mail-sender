@@ -6,8 +6,9 @@
     "start": "nodemon src/index.js",
     "lint": "standard \"src/**/*.js\" \"tests/**/*.js\" \"bin/www\"",
     "lint:fix": "yarn lint --fix",
-    "test": "../node_modules/.bin/jest",
-    "deploy": "sls deploy"
+    "test": "jest",
+    "deploy": "sls deploy",
+    "deploy:local": "sls deploy && sls invoke -f app"
   },
   "dependencies": {
     "aws-sdk": "^2.771.0",
@@ -37,9 +38,6 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "tests/test.setup.js"
-    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
