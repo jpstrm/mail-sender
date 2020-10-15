@@ -12,7 +12,7 @@ package:
 
 functions:
   app:
-    handler: src/appHandler
+    handler: src/appHandler.handler
     events:
       - http:
           path: /

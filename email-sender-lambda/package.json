@@ -3,41 +3,32 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon bin/www",
-    "start": "cross-env NODE_ENV=production node bin/www",
+    "start": "nodemon src/index.js",
     "lint": "standard \"src/**/*.js\" \"tests/**/*.js\" \"bin/www\"",
     "lint:fix": "yarn lint --fix",
-    "test": "jest"
+    "test": "../node_modules/.bin/jest",
+    "deploy": "sls deploy"
   },
   "dependencies": {
     "aws-sdk": "^2.771.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
-    "express": "~4.16.1",
-    "express-request-id": "^1.4.1",
-    "http-errors": "~1.6.3",
-    "joi": "^14.3.1",
     "lodash": "^4.17.20",
     "log4js": "^6.3.0",
     "log4js-extend": "^0.2.1",
-    "mongoose": "^5.9.15",
     "nconf": "^0.10.0",
     "nocache": "^2.1.0",
     "nodemailer": "^6.4.13",
-    "serverless-http": "^2.6.0",
-    "standard": "^14.3.4",
-    "swagger-ui-express": "^4.1.4"
+    "standard": "^14.3.4"
   },
   "devDependencies": {
     "husky": "^4.3.0",
     "jest": "^26.5.3",
-    "nodemon": "^2.0.4",
-    "supertest": "^5.0.0"
+    "nodemon": "^2.0.4"
   },
   "husky": {
     "hooks": {
@@ -47,7 +38,7 @@
   "jest": {
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
-      "<rootDir>/tests/test.setup.js"
+      "tests/test.setup.js"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
