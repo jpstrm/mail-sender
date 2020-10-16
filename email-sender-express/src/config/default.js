@@ -2,7 +2,7 @@ const _merge = require('lodash').merge
 const dotenv = require('dotenv')
 
 // configure environment from .env file
-dotenv.config()
+dotenv.config('../.env')
 
 const local = {
   allowedCorsOrigins: ['/localhost/'],

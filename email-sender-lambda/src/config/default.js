@@ -2,7 +2,7 @@ const _merge = require('lodash').merge
 const dotenv = require('dotenv')
 
 // configure environment from .env file
-dotenv.config()
+dotenv.config({ path: '../.env' })
 
 const local = {
   logging: {
@@ -10,10 +10,13 @@ const local = {
     layoutType: 'coloured',
     maxStringLength: 80
   },
-  mail: {
+  email: {
     host: process.env.EMAIL_HOST || 'smtp.test.com',
+    port: process.env.EMAIL_PORT || 587,
+    secure: process.env.EMAIL_SECURE || 'secure123',
+    tls: process.env.EMAIL_TLS || false,
     user: process.env.EMAIL_USER || 'test@test.com.br',
-    pass: process.env.EMAIL_PASS || 'test123'
+    pass: process.env.EMAIL_USER_PASS || 'test123',
   },
   aws: {
     region: process.env.AWS_REGION || 'us-west-2',

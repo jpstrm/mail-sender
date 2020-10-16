@@ -1,15 +1,15 @@
-const logger = require('./common/log').getLogger('appHandler')
+const logger = require('./common/log').getLogger('index')
 const emailService = require('./services/email.service')
 
 module.exports.handler = async (event, context) => {
-  console.log('context', context)
+  logger.debug('Context', context)
   logger.info('Inicializando função de envio de emails')
   let total = 0
   if (event && event.Records && event.Records.length) {
-    event.Records.forEach(entry => {
-      emailService.send(entry.body)
+    for (const record of event.Records) {
+      const result = await emailService.send(record.body)
       total++
-    })
+    }
     const successMsg = 'Emails enviados com sucesso, total: ' + total
     logger.info(successMsg)
     return {

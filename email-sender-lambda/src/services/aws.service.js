@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk')
 const config = require('../config')
 const errors = require('../errors/errors')
-const logger = require('../common/log').getLogger('email')
+const logger = require('../common/log').getLogger('aws')
 
 // Set the region
 AWS.config.update({ region: config.get('aws:region') })
