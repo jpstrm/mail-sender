@@ -7,8 +7,8 @@ module.exports.handler = async (event, context) => {
   logger.debug('Context', context)
   logger.info('Inicializando função de envio de emails')
   let total = 0
-  if (event && event.Records && event.Records.length) {
-    for (const record of event.Records) {
+  if (event && event.Messages && event.Messages.length) {
+    for (const record of event.Messages) {
       await emailService.send(record.body)
       total++
     }
