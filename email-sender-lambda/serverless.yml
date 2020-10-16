@@ -1,4 +1,4 @@
-service: emailsender
+service: emailsenderLambda
 
 frameworkVersion: '2'
 

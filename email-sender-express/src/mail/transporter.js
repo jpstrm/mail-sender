@@ -8,10 +8,13 @@ const aws = require('../controllers/aws.controller')
 const templateTypes = require('./templateSource.enum')
 
 const transport = {
-  host: config.get('mail:host'),
+  host: config.get('email:host'),
+  port: config.get('email:port') || 587,
+  secure: config.get('email:secure') || false,
+  requireTLS: config.get('email:tls') || false,
   auth: {
-    user: config.get('mail:user'),
-    pass: config.get('mail:pass')
+    user: config.get('email:user'),
+    pass: config.get('email:pass')
   }
 }
 
