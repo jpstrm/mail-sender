@@ -1,8 +1,6 @@
 const logger = require('./common/log').getLogger('index')
 const emailService = require('./services/email.service')
 
-console.log('environments', process.env)
-
 module.exports.handler = async (event, context) => {
   logger.debug('Event', event)
   logger.debug('Context', context)
