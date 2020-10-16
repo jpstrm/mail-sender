@@ -1,7 +1,7 @@
+const config = require('../config')
 const log4js = require('log4js')
 const log4jsExtend = require('log4js-extend')
 
-const config = require('../config')
 const logLevel = config.get('logging:level')
 const layoutType = config.get('logging:layoutType')
 
