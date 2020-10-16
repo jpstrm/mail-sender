@@ -7,7 +7,7 @@ module.exports.handler = async (event, context) => {
   let total = 0
   if (event && event.Records && event.Records.length) {
     for (const record of event.Records) {
-      const result = await emailService.send(record.body)
+      await emailService.send(record.body)
       total++
     }
     const successMsg = 'Emails enviados com sucesso, total: ' + total
@@ -26,5 +26,4 @@ module.exports.handler = async (event, context) => {
       }
     }
   }
-
 }

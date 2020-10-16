@@ -16,7 +16,7 @@ const local = {
     secure: process.env.EMAIL_SECURE || 'secure123',
     tls: process.env.EMAIL_TLS || false,
     user: process.env.EMAIL_USER || 'test@test.com.br',
-    pass: process.env.EMAIL_USER_PASS || 'test123',
+    pass: process.env.EMAIL_USER_PASS || 'test123'
   },
   aws: {
     region: process.env.AWS_REGION || 'us-west-2',
