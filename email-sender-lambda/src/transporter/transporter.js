@@ -16,6 +16,9 @@ const transport = {
   auth: {
     user: config.get('email:user'),
     pass: config.get('email:pass')
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 }
 
@@ -56,7 +59,8 @@ const sendMail = async (emailReq) => {
     logger.info('Enviando email com o transproter...')
     return await transporter.sendMail(options)
   } catch (err) {
-    logger.error(new errors.MailError(err))
+    logger.error('Erro ao enviar email')
+    throw new errors.MailError(err)
   }
 }
 
