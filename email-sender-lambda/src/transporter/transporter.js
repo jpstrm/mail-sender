@@ -8,6 +8,7 @@ const awsService = require('../services/aws.service')
 const templateTypes = require('../../templates/templateSource.enum')
 
 const transport = {
+  service: config.get('email:service'),
   host: config.get('email:host'),
   port: config.get('email:port') || 587,
   secure: config.get('email:secure') || false,

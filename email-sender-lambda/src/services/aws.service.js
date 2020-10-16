@@ -7,7 +7,7 @@ const logger = require('../common/log').getLogger('aws')
 AWS.config.update({ region: config.get('aws:region') })
 
 // Create S3 service object
-const s3Client = new AWS.S3({ apiVersion: config.get('aws:apiVersion') })
+const s3Client = new AWS.S3()
 
 // Call S3 to list the buckets
 const getTemplate = async (aws) => {

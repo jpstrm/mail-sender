@@ -11,6 +11,7 @@ const local = {
     maxStringLength: 80
   },
   email: {
+    service: process.env.EMAIL_SERVICE || 'gmail',
     host: process.env.EMAIL_HOST || 'smtp.test.com',
     port: process.env.EMAIL_PORT || 587,
     secure: process.env.EMAIL_SECURE || 'secure123',
@@ -20,7 +21,6 @@ const local = {
   },
   aws: {
     region: process.env.AWS_REGION || 'us-west-2',
-    apiVersion: '2006-03-01',
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   }
