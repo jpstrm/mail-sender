@@ -13,16 +13,16 @@ const s3Client = new AWS.S3()
 const getTemplate = async (aws) => {
   let template = ''
   try {
-    logger.debug('Fetching buckets from AWS S3')
+    logger.debug('Buscando buckets do AWS S3')
     const params = { Bucket: aws.bucketName, Key: aws.name }
     const data = (await s3Client.getObject(params).promise())
     template = data.Body.toString('utf-8')
   } catch (err) {
-    logger.error('S3 error when listing buckets')
+    logger.error('Erro ao listar buckets no AWS S3')
     throw new errors.AwsError(err)
   }
   if (!template) {
-    throw new errors.NotFoundError('Template not found in AWS S3', 'Template not found')
+    throw new errors.NotFoundError('Template não encontrado no AWS S3', 'Template não encontrado')
   }
   return template
 }
