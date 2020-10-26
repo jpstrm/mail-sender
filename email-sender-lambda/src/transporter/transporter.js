@@ -10,15 +10,15 @@ const templateTypes = require('../../templates/templateSource.enum')
 const transport = {
   service: config.get('email:service'),
   host: config.get('email:host'),
-  port: config.get('email:port') || 587,
-  secure: config.get('email:secure') || false,
-  requireTLS: config.get('email:tls') || false,
+  port: config.get('email:port'),
+  secure: config.get('email:secure'),
+  requireTLS: config.get('email:tlsRejectUnauthorized'),
   auth: {
     user: config.get('email:user'),
     pass: config.get('email:pass')
   },
   tls: {
-    rejectUnauthorized: false
+    rejectUnauthorized: config.get('email:tls')
   }
 }
 

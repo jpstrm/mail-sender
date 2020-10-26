@@ -10,6 +10,7 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
     EMAIL_PORT
     EMAIL_SECURE
     EMAIL_TLS
+    EMAIL_TLS_REJECT_UNAUTHORIZED
     EMAIL_USER
     EMAIL_USER_PASS
     

@@ -11,11 +11,11 @@ const local = {
     maxStringLength: 80
   },
   email: {
-    service: process.env.EMAIL_SERVICE || 'gmail',
     host: process.env.EMAIL_HOST || 'smtp.test.com',
     port: process.env.EMAIL_PORT || 587,
-    secure: process.env.EMAIL_SECURE || 'secure123',
+    secure: process.env.EMAIL_SECURE || false,
     tls: process.env.EMAIL_TLS || false,
+    tlsRejectUnauthorized: process.env.EMAIL_TLS_REJECT_UNAUTHORIZED || false,
     user: process.env.EMAIL_USER || 'test@test.com.br',
     pass: process.env.EMAIL_USER_PASS || 'test123'
   },
