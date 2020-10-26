@@ -49,7 +49,7 @@ const sendMail = async (emailReq) => {
 
   const options = {
     from: emailReq.from,
-    to: emailReq.email,
+    to: emailReq.to,
     cc: emailReq.cc,
     subject: emailReq.subject,
     html: emailData

@@ -19,14 +19,17 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
     Request Body usando template da AWS
     ```
     {
-        "name": "Test",
         "from": "test@test.com",
         "to": "test1@test.com",
+        "cc": "test1@test.com,test2@test.com",
         "subject": "This is a test",
         "template": {
             "name": "aws.template.ejs",
             "source": "AWS",
             "bucketName": "bucket.test"
+        },
+        "renderData": {
+            "name": "Data test"
         }
     }
     ```
