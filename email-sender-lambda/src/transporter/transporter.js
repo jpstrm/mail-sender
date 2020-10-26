@@ -44,7 +44,7 @@ const sendMail = async (emailReq) => {
     emailData = ejs.render(template)
   } else {
     templatePath = `${path.resolve('./')}/templates/${emailReq.template.name}`
-    emailData = await ejs.renderFile(templatePath, { name: emailReq.name })
+    emailData = await ejs.renderFile(templatePath, { data: emailReq.renderData })
   }
 
   const options = {
