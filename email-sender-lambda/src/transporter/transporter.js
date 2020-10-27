@@ -8,7 +8,6 @@ const awsService = require('../services/aws.service')
 const templateTypes = require('../../templates/templateSource.enum')
 
 const transport = {
-  service: config.get('email:service'),
   host: config.get('email:host'),
   port: config.get('email:port'),
   secure: config.get('email:secure'),
@@ -56,7 +55,7 @@ const sendMail = async (emailReq) => {
   }
   logger.debug('html data', options.html)
   try {
-    logger.info('Enviando email com o transproter...')
+    logger.info(`Enviando email com o transproter no host: ${transport.host} e na port ${transport.port}.`)
     return await transporter.sendMail(options)
   } catch (err) {
     logger.error('Erro ao enviar email')
