@@ -17,7 +17,7 @@ const emailSend = Joi.object().keys({
     cid: Joi.string().trim(),
     encoding: Joi.string().trim().required(),
     headers: Joi.string().trim(),
-    raw: Joi.string().trim(),
+    raw: Joi.string().trim()
   })),
   template: Joi.object().keys({
     name: Joi.string().trim().required(),

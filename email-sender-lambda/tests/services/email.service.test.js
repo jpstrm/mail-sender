@@ -23,7 +23,6 @@ describe('Email service', () => {
       expect(e.body.error).toEqual(expect.stringContaining('key does not exist'))
     }
   })
-
 })
 
 describe('Email request validators', () => {
@@ -41,13 +40,13 @@ describe('Email request validators', () => {
   }
 
   it('should reject with invalid \'from\' field', async () => {
-    const mockFn = jest.fn({
-      getObject: jest.fn()
-    })
-
-    jest.mock('aws-sdk', () => {
-      S3: new mockFn()
-    })
+    // const mockFn = jest.fn({
+    //   getObject: jest.fn()
+    // })
+    //
+    // jest.mock('aws-sdk', () => {
+    //   S3: new mockFn()
+    // })
     body.from = ''
     const res = await emailService.send(body)
     expect(res.statusCode).toEqual(400)
