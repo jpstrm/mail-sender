@@ -71,11 +71,25 @@ class AwsError extends AppError {
   }
 }
 
+class JoiError extends AppError {
+  constructor (error, errorDescription, additionalParams) {
+    super(error)
+    this.statusCode = 400
+    this.body = {
+      statusCode: this.statusCode,
+      error: error.message,
+      errorDescription,
+      ...additionalParams
+    }
+  }
+}
+
 module.exports = {
   AppError,
   ApplicationError,
   InternalError,
   MailError,
   NotFoundError,
-  AwsError
+  AwsError,
+  JoiError
 }

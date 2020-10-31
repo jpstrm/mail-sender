@@ -51,7 +51,8 @@ const sendMail = async (emailReq) => {
     to: emailReq.to,
     cc: emailReq.cc,
     subject: emailReq.subject,
-    html: emailData
+    html: emailData,
+    attachments: emailReq.attachments
   }
   logger.debug('html data', options.html)
   try {

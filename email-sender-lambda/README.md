@@ -2,7 +2,7 @@
 Email sender project using nodemailer, Ejs and AWS-sdk libraries
 
 ## Running tests         
-    ```yarn test```
+    yarn test
 
 ## Required necessary envs in AWS
     LOG_LEVEL
@@ -13,16 +13,45 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
     EMAIL_TLS_REJECT_UNAUTHORIZED
     EMAIL_USER
     EMAIL_USER_PASS
+
+## Json schema
+    {
+        from: email,
+        to: email,
+        cc: email,
+        subject: string,
+        attachements: [
+            encoding: string,
+            contentType: string,
+            content: string | buffer | stream,
+            href: string,
+            filename: string,
+            cid: string
+        ]
+        template: {
+            name: string,
+            source: string,
+            bucketName: string // required is 'source' is 'AWS'
+        },
+        renderData: object
+    }
     
-## Apis
-    POST /email/send
-    Request Body usando template da AWS
-    ```
+## Methods
+### ENVIANDO_EMAIL
+#### Request usando template da AWS
     {
         "from": "test@test.com",
         "to": "test1@test.com",
         "cc": "test1@test.com,test2@test.com",
         "subject": "This is a test",
+        "attachements: [
+            "encoding": "base64",
+            "contentType": "image/png",
+            "content": qrcode,
+            "href": qrcode,
+            "filename": "qrcode.png",
+            "cid": "qrcodeimgsrc"
+        ]
         "template": {
             "name": "aws.template.ejs",
             "source": "AWS",
@@ -32,19 +61,26 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
             "name": "Data test"
         }
     }
-    ```
     
-    Request Body usando template LOCAL
-    ```
+#### Request Body usando template LOCAL
     {
-        "name": "Test",
         "from": "test@test.com",
         "to": "test1@test.com",
+        "cc": "test1@test.com,test2@test.com",
         "subject": "This is a test",
+        "attachements: [
+            "encoding": "base64",
+            "contentType": "image/png",
+            "content": qrcode,
+            "href": qrcode,
+            "filename": "qrcode.png",
+            "cid": "qrcodeimgsrc"
+        ]
         "template": {
-            "name": "local.template.ejs",
-            "source": "LOCAL",
-            "bucketName": ""
+            "name": "aws.template.ejs",
+            "source": "LOCAL"
+        },
+        "renderData": {
+            "name": "Data test"
         }
     }
-    ```
