@@ -5,7 +5,13 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
     ```yarn test```
 
 ## Required necessary envs in AWS
+    // Application
     LOG_LEVEL
+    
+    // AWS
+    AWS_SQS_QUEUE_URL
+    
+    // Email
     EMAIL_HOST
     EMAIL_PORT
     EMAIL_SECURE
@@ -13,6 +19,7 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
     EMAIL_TLS_REJECT_UNAUTHORIZED
     EMAIL_USER
     EMAIL_USER_PASS
+    EMAIL_RETRIES // o padrão é 3
     
 ## Apis
     POST /email/send

@@ -17,12 +17,11 @@ const local = {
     tls: process.env.EMAIL_TLS || false,
     tlsRejectUnauthorized: process.env.EMAIL_TLS_REJECT_UNAUTHORIZED || false,
     user: process.env.EMAIL_USER || 'test@test.com.br',
-    pass: process.env.EMAIL_USER_PASS || 'test123'
+    pass: process.env.EMAIL_USER_PASS || 'test123',
+    retries: process.env.EMAIL_RETRIES || 3
   },
   aws: {
-    region: process.env.AWS_REGION || 'us-west-2',
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    region: process.env.AWS_REGION || 'us-west-2'
   }
 }
 

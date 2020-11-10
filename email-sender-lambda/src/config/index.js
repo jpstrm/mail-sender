@@ -6,7 +6,8 @@ const environments = {
   LOG_LEVEL: 'logging:level',
   AWS_REGION: 'aws:region',
   AWS_ACCESS_KEY_ID: 'aws:accessKey',
-  AWS_SECRET_ACCESS_KEY: 'aws:secretKey'
+  AWS_SECRET_ACCESS_KEY: 'aws:secretKey',
+  AWS_SQS_QUEUE_URL: 'aws:queueUrl'
 }
 
 nconf.env({
