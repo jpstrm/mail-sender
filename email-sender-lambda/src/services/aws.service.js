@@ -29,17 +29,17 @@ const getTemplate = async (body) => {
   return template
 }
 
-async function sendQueue (record) {
-  record.retries = record.retries ? record.retries + 1 : 1
+async function sendQueue (email) {
+  email.retries = email.retries ? email.retries + 1 : 1
   const maxRetries = config.get('email:retries')
-  if (record.retries === maxRetries) {
+  if (email.retries === maxRetries) {
     logger.info(`Email removido da fila após ${maxRetries} tentativas`)
     return
   }
   const params = {
     QueueUrl: config.get('aws:queueUrl'),
     DelaySeconds: 0,
-    MessageBody: JSON.stringify(record)
+    MessageBody: JSON.stringify(email)
   }
   try {
     await sqsClient.sendMessage(params)

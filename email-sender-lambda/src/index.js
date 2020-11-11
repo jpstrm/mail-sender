@@ -8,11 +8,12 @@ module.exports.handler = async (event, context) => {
   let total = 0
   if (event && event.Records && event.Records.length) {
     for (const record of event.Records) {
+      const body = JSON.parse(record.body)
       try {
-        await emailService.send(JSON.parse(record.body))
+        await emailService.send(body)
         total++
       } catch (err) {
-        await awsService.sendQueue(record)
+        await awsService.sendQueue(body)
       }
     }
     const successMsg = 'Emails enviados com sucesso, total: ' + total
