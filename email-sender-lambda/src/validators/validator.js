@@ -1,9 +1,9 @@
-const Joi = require('joi')
 const errors = require('../../src/errors/errors')
 const emailSchema = require('../schema/email.schema')
 
-function validator (body, schema) {
-  const { error } = Joi.validate(body, schema)
+function validator (body) {
+  console.log('test')
+  const { error } = emailSchema.validate(body)
   const valid = error == null
 
   if (!valid) {

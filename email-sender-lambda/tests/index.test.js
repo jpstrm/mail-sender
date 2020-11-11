@@ -1,11 +1,11 @@
 'use strict'
 
-const index = require('../../src/index')
-const emailService = require('../../src/services/email.service')
-const awsService = require('../../src/services/aws.service')
+const index = require('../src')
+const emailService = require('../src/services/email.service')
+const awsService = require('../src/services/aws.service')
 
-jest.mock('../../src/services/email.service')
-jest.mock('../../src/services/aws.service')
+jest.mock('../src/services/email.service')
+jest.mock('../src/services/aws.service')
 
 describe('Handler test', () => {
   it('Deve enviar email e retornar statusCode 200', async () => {
@@ -48,6 +48,6 @@ describe('Handler test', () => {
       ]
     }
     await index.handler(event)
-    expect(awsService.sendQueue).toBeCalled()
+    expect(awsService.sendQueue).toBeCalledWith(body)
   })
 })
