@@ -25,10 +25,15 @@ const emailSend = Joi.object().keys({
     bucketName: Joi.when('source', {
       is: 'AWS',
       then: Joi.string().trim().required(),
-      otherwise: Joi.string()
+      otherwise: Joi.string().allow(null, '')
     })
   }).required(),
-  renderData: Joi.object()
+  renderData: Joi.object(),
+  options: Joi.object().keys({
+    withSaiposLogo: Joi.boolean().required(),
+    withSignature: Joi.boolean().required(),
+    customEmail: Joi.boolean().required()
+  }).required()
 })
 
 module.exports = emailSend

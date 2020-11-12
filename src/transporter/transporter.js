@@ -22,7 +22,7 @@ const transport = {
 }
 
 // create transport instance
-const transporter = nodemailer.createTransport(transport)
+const transporter = nodemailer.createTransport()
 
 transporter.verify((err, success) => {
   if (err) {
@@ -32,19 +32,8 @@ transporter.verify((err, success) => {
   }
 })
 
-const sendMail = async (emailReq) => {
-  let templatePath = `${path.resolve('./')}/templates/${emailReq.template.name}`
-  let template = ''
-  let emailData = ''
-  if (emailReq.template.source === templateTypes.AWS) {
-    logger.info('Buscando template do diretório da AWS S3')
-    template = await awsService.getTemplate(emailReq.template)
-    logger.info('Template obtido com sucesso da AWS S3')
-    emailData = ejs.render(template)
-  } else {
-    templatePath = `${path.resolve('./')}/templates/${emailReq.template.name}`
-    emailData = await ejs.renderFile(templatePath, { data: emailReq.renderData })
-  }
+async function sendMail (emailReq) {
+  const emailData = await getHtmlContent(emailReq)
 
   const options = {
     from: emailReq.from,
@@ -62,6 +51,26 @@ const sendMail = async (emailReq) => {
     logger.error('Erro ao enviar email')
     throw new errors.MailError(err)
   }
+}
+
+async function getHtmlContent (emailReq) {
+  let templatePath = `${path.resolve('./')}/templates/${emailReq.template.name}`
+  let emailHtml = ''
+  if (emailReq.template.source === templateTypes.AWS) {
+    logger.info('Buscando template do diretório da AWS S3')
+    const template = await awsService.getTemplate(emailReq.template)
+    logger.info('Template obtido com sucesso da AWS S3')
+    emailHtml = ejs.render(template)
+  } else {
+    templatePath = `${path.resolve('./')}/templates/${emailReq.template.name}`
+    emailHtml = await ejs.renderFile(templatePath, { data: emailReq.renderData })
+  }
+
+  const templateBasePath = `${path.resolve('./')}/templates/email-base.ejs`
+  return ejs.renderFile(templateBasePath, {
+    ...emailReq.options,
+    htmlContent: emailHtml
+  })
 }
 
 module.exports = {

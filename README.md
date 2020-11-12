@@ -29,14 +29,17 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
         "to": "test1@test.com",
         "cc": "test1@test.com,test2@test.com",
         "subject": "This is a test",
-        "attachements: [
+        "attachements": [
+        {
+        
             "encoding": "base64",
             "contentType": "image/png",
             "content": qrcode,
             "href": qrcode,
             "filename": "qrcode.png",
             "cid": "qrcodeimgsrc"
-        ]
+        }
+        ],
         "template": {
             "name": "aws.template.ejs",
             "source": "AWS",
@@ -44,6 +47,11 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
         },
         "renderData": {
             "name": "Data test"
+        },
+        "options": {
+            "withSaiposLogo": true,
+            "withSignature": true,
+            "customEmail": true
         }
     }
     
@@ -53,19 +61,26 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
         "to": "test1@test.com",
         "cc": "test1@test.com,test2@test.com",
         "subject": "This is a test",
-        "attachements: [
+        "attachements": [
+        {
             "encoding": "base64",
             "contentType": "image/png",
             "content": qrcode,
             "href": qrcode,
             "filename": "qrcode.png",
             "cid": "qrcodeimgsrc"
-        ]
+        }
+        ],
         "template": {
             "name": "aws.template.ejs",
             "source": "LOCAL"
         },
         "renderData": {
             "name": "Data test"
+        },
+        "options": {
+            "withSaiposLogo": true,
+            "withSignature": true,
+            "customEmail": true
         }
     }
