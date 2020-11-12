@@ -40,7 +40,7 @@ describe('Transporter test', () => {
 
   it('should send email', async () => {
     await transporter.sendMail(getBody())
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[0][0]).toEqual(
       expect.objectContaining({
         subject: 'This is a test',
         from: 'test123@test.com',
@@ -55,7 +55,7 @@ describe('Transporter test', () => {
   it('should send email with Saipos logo', async () => {
     awsService.getTemplate = jest.fn().mockResolvedValue('success')
     await transporter.sendMail(getBody())
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[1][0]).toEqual(
       expect.objectContaining({
         subject: 'This is a test',
         from: 'test123@test.com',
@@ -70,7 +70,7 @@ describe('Transporter test', () => {
   it('should send email with Saipos signature', async () => {
     awsService.getTemplate = jest.fn().mockResolvedValue('success')
     await transporter.sendMail(getBody())
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[2][0]).toEqual(
       expect.objectContaining({
         subject: 'This is a test',
         from: 'test123@test.com',
@@ -87,7 +87,7 @@ describe('Transporter test', () => {
     const body = getBody()
     body.options.withSaiposLogo = false
     await transporter.sendMail(body)
-    expect(sendMail).not.toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[3][0]).not.toEqual(
       expect.objectContaining({
         html: expect.stringContaining('<img style="border: 0;display: block;height: auto;width: 100%;max-width: 200px;" alt="" width="200" src="https://s3-sa-east-1.amazonaws.com/saipos-estatico/logo-saipos-vertical-azul.png" />')
       })
@@ -99,7 +99,7 @@ describe('Transporter test', () => {
     const body = getBody()
     body.options.withSignature = false
     await transporter.sendMail(body)
-    expect(sendMail).not.toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[4][0]).not.toEqual(
       expect.objectContaining({
         html: expect.stringContaining('>Atenciosamente')
       })
@@ -113,7 +113,7 @@ describe('Transporter test', () => {
     body.template.bucketName = 'test'
     body.template.name = 'test.template.ejs'
     await transporter.sendMail(body)
-    expect(sendMail).toHaveBeenCalledWith(
+    expect(sendMail.mock.calls[5][0]).toEqual(
       expect.objectContaining({
         subject: 'This is a test',
         from: 'test123@test.com',

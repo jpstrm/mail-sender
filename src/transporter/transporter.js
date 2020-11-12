@@ -22,7 +22,7 @@ const transport = {
 }
 
 // create transport instance
-const transporter = nodemailer.createTransport()
+const transporter = nodemailer.createTransport(transport)
 
 transporter.verify((err, success) => {
   if (err) {
