@@ -24,7 +24,8 @@ describe('Email service', () => {
       options: {
         withSaiposLogo: true,
         withSignature: true,
-        customEmail: true
+        customEmail: true,
+        photoSiteLogo: ''
       }
     }
   }
@@ -217,5 +218,26 @@ describe('Email request validators', () => {
       expect(err.statusCode).toEqual(400)
       expect(err.body.error).toEqual(expect.stringContaining('"options.customEmail" must be a boolean'))
     }
+  })
+
+  it('should reject with invalid \'options.photoSiteLogo\' field', async () => {
+    const body = getBody()
+    body.options.customEmail = true
+    body.options.photoSiteLogo = 123
+    try {
+      const res = await emailService.send(body)
+      expect(res).toBeUndefined()
+    } catch (err) {
+      expect(err.statusCode).toEqual(400)
+      expect(err.body.error).toEqual(expect.stringContaining('"options.photoSiteLogo" must be a string'))
+    }
+  })
+
+  it('should not reject with \'options.photoSiteLogo\' field empty when customEmail false', async () => {
+    const body = getBody()
+    body.options.customEmail = false
+    body.options.photoSiteLogo = ''
+    const res = await emailService.send(body)
+    expect(res).toEqual({ msg: 'Email enviado com sucesso' })
   })
 })

@@ -33,7 +33,7 @@ describe('Transporter test', () => {
       options: {
         withSaiposLogo: true,
         withSignature: true,
-        customEmail: true
+        customEmail: false
       }
     }
   }
@@ -121,6 +121,24 @@ describe('Transporter test', () => {
         cc: undefined,
         attachments: undefined,
         html: expect.stringContaining('<p>aws-success</p>')
+      })
+    )
+  })
+
+  it('should send email with photoSiteLogo when customEmail is true', async () => {
+    const photoSiteLogo = 'http://photo-site-logo.jpg'
+    const body = getBody()
+    body.options.customEmail = true
+    body.options.photoSiteLogo = photoSiteLogo
+    await transporter.sendMail(body)
+    expect(sendMail.mock.calls[6][0]).toEqual(
+      expect.objectContaining({
+        subject: 'This is a test',
+        from: 'test123@test.com',
+        to: 'test1234@test.com',
+        cc: undefined,
+        attachments: undefined,
+        html: expect.stringContaining(photoSiteLogo)
       })
     )
   })

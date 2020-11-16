@@ -32,7 +32,12 @@ const emailSend = Joi.object().keys({
   options: Joi.object().keys({
     withSaiposLogo: Joi.boolean().required(),
     withSignature: Joi.boolean().required(),
-    customEmail: Joi.boolean().required()
+    customEmail: Joi.boolean().required(),
+    photoSiteLogo: Joi.when('customEmail', {
+      is: true,
+      then: Joi.string().allow(null, ''),
+      otherwise: Joi.optional().allow('')
+    })
   }).required()
 })
 

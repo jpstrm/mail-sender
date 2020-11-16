@@ -66,10 +66,21 @@ async function getHtmlContent (emailReq) {
     emailHtml = await ejs.renderFile(templatePath, { data: emailReq.renderData })
   }
 
-  const templateBasePath = `${path.resolve('./')}/templates/email-base.ejs`
+  return getTemplate(emailReq.options, emailHtml)
+}
+
+function getTemplate (options, html) {
+  let templateName = 'email-base'
+  if (options.customEmail) {
+    const photoSiteLogo = options.photoSiteLogo
+    options.logo = photoSiteLogo ? `https://static.saipos.com/${photoSiteLogo}` : undefined
+    templateName = `${templateName}-by-store`
+  }
+
+  const templateBasePath = `${path.resolve('./')}/templates/${templateName}.ejs`
   return ejs.renderFile(templateBasePath, {
-    ...emailReq.options,
-    htmlContent: emailHtml
+    ...options,
+    htmlContent: html
   })
 }
 

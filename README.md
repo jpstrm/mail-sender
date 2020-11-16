@@ -51,7 +51,8 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
         "options": {
             "withSaiposLogo": true,
             "withSignature": true,
-            "customEmail": true
+            "customEmail": false,
+            "photoSiteLogo": ""
         }
     }
     
@@ -81,6 +82,7 @@ Email sender project using nodemailer, Ejs and AWS-sdk libraries
         "options": {
             "withSaiposLogo": true,
             "withSignature": true,
-            "customEmail": true
+            "customEmail": false,
+            "photoSiteLogo": ""
         }
     }
